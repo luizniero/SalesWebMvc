@@ -12,6 +12,13 @@
 5. O arquivo _Layout.cshtml é a base do layout geral da aplicação.
 6. O arquivo _ViewStart define qual é o arquivo de layout geral da aplicação
 7. O arquivo _ViewImport defiine importações que serão usadas na aplicação de forma geral
+8. O sistema de templates do asp net core é do tipo "Natural Templates". Isso diz respeito ao comportamento do controlador chamar a página.
+9. O IActionResult é uma interface que define um tipo genérico para resultados de qualquer ação. Ele pode ser de vários tipos específicos:
+9.1. ViewResult;
+9.2. PartialViewREsult;
+9.3. ContentResult;
+9.4. RedirectResult;
+9.5. etc
 
 
 Neste projeto:
