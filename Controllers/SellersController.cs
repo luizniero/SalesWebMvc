@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalesWebMvc.Services;
+using SalesWebMvc.Models;
+using System.Threading.Tasks;
+using System;
 
 namespace SalesWebMvc.Controllers
 {
@@ -16,6 +19,19 @@ namespace SalesWebMvc.Controllers
         {
             var list = _services.FindAll();
             return View(list);
+        }
+
+        [HttpPost]
+        public IActionResult Create(Seller seller)
+        {
+            Console.WriteLine("Tentando criar");
+            //_services.Insert(seller);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }
