@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Data;
 using SalesWebMvc.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace SalesWebMvc.Services
@@ -21,13 +23,12 @@ namespace SalesWebMvc.Services
         
         }
 
-        public void Insert(Seller obj)
-        { 
-            _context.Add(obj);
+        public void Insert(Seller seller)
+        {
+            _context.Add(seller);
             _context.SaveChanges();
+            
         }
-
-
 
     }
 }

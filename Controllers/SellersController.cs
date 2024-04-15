@@ -1,37 +1,50 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SalesWebMvc.Services;
+using Microsoft.EntityFrameworkCore;
+using SalesWebMvc.Data;
 using SalesWebMvc.Models;
-using System.Threading.Tasks;
+using SalesWebMvc.Services;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SalesWebMvc.Controllers
 {
     public class SellersController : Controller
     {
+        private readonly SalesWebMvcContext _context;
         private readonly SellerServices _services;
 
-        public SellersController(SellerServices services)
+
+        public SellersController(SellerServices service)
         {
-            _services = services;
+            //_context = context;
+            _services = service;
         }
 
-        public IActionResult Index()
+        // GET: Sellers
+        public async Task<IActionResult> Index()
         {
-            var list = _services.FindAll();
-            return View(list);
+            return View(_services.FindAll());
         }
 
-        [HttpPost]
-        public IActionResult Create(Seller seller)
-        {
-            Console.WriteLine("Tentando criar");
-            //_services.Insert(seller);
-            return RedirectToAction(nameof(Index));
-        }
 
+        // GET: Sellers/Create
         public IActionResult Create()
         {
             return View();
+        }
+
+        // POST: Sellers/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create( Seller seller)
+        {
+            if (ModelState.IsValid)
+            {
+                _services.Insert(seller);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(seller);
         }
     }
 }
